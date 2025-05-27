@@ -60,9 +60,12 @@ import {
   ɵɵinject,
   ɵɵinjectAttribute,
   ɵɵstyleProp
-} from "./chunk-3XPRMCCN.js";
+} from "./chunk-JDDSFKDX.js";
 
-// node_modules/@angular/common/fesm2022/common.mjs
+// node_modules/@angular/common/fesm2022/dom_tokens-rA0ACyx7.mjs
+var DOCUMENT = new InjectionToken(ngDevMode ? "DocumentToken" : "");
+
+// node_modules/@angular/common/fesm2022/location-Dq4mJT-A.mjs
 var _DOM = null;
 function getDOM() {
   return _DOM;
@@ -72,26 +75,6 @@ function setRootDomAdapter(adapter) {
 }
 var DomAdapter = class {
 };
-var PlatformNavigation = class _PlatformNavigation {
-  static ɵfac = function PlatformNavigation_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _PlatformNavigation)();
-  };
-  static ɵprov = ɵɵdefineInjectable({
-    token: _PlatformNavigation,
-    factory: () => (() => window.navigation)(),
-    providedIn: "platform"
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PlatformNavigation, [{
-    type: Injectable,
-    args: [{
-      providedIn: "platform",
-      useFactory: () => window.navigation
-    }]
-  }], null, null);
-})();
-var DOCUMENT = new InjectionToken(ngDevMode ? "DocumentToken" : "");
 var PlatformLocation = class _PlatformLocation {
   historyGo(relativePosition) {
     throw new Error(ngDevMode ? "Not implemented" : "");
@@ -244,7 +227,7 @@ var PathLocationStrategy = class _PathLocationStrategy extends LocationStrategy 
     this._platformLocation = _platformLocation;
     this._baseHref = href ?? this._platformLocation.getBaseHrefFromDOM() ?? inject(DOCUMENT).location?.origin ?? "";
   }
-  /** @nodoc */
+  /** @docs-private */
   ngOnDestroy() {
     while (this._removeListenerFns.length) {
       this._removeListenerFns.pop()();
@@ -311,80 +294,6 @@ var PathLocationStrategy = class _PathLocationStrategy extends LocationStrategy 
     }]
   }], null);
 })();
-var HashLocationStrategy = class _HashLocationStrategy extends LocationStrategy {
-  _platformLocation;
-  _baseHref = "";
-  _removeListenerFns = [];
-  constructor(_platformLocation, _baseHref) {
-    super();
-    this._platformLocation = _platformLocation;
-    if (_baseHref != null) {
-      this._baseHref = _baseHref;
-    }
-  }
-  /** @nodoc */
-  ngOnDestroy() {
-    while (this._removeListenerFns.length) {
-      this._removeListenerFns.pop()();
-    }
-  }
-  onPopState(fn) {
-    this._removeListenerFns.push(this._platformLocation.onPopState(fn), this._platformLocation.onHashChange(fn));
-  }
-  getBaseHref() {
-    return this._baseHref;
-  }
-  path(includeHash = false) {
-    const path = this._platformLocation.hash ?? "#";
-    return path.length > 0 ? path.substring(1) : path;
-  }
-  prepareExternalUrl(internal) {
-    const url = joinWithSlash(this._baseHref, internal);
-    return url.length > 0 ? "#" + url : url;
-  }
-  pushState(state, title, path, queryParams) {
-    const url = this.prepareExternalUrl(path + normalizeQueryParams(queryParams)) || this._platformLocation.pathname;
-    this._platformLocation.pushState(state, title, url);
-  }
-  replaceState(state, title, path, queryParams) {
-    const url = this.prepareExternalUrl(path + normalizeQueryParams(queryParams)) || this._platformLocation.pathname;
-    this._platformLocation.replaceState(state, title, url);
-  }
-  forward() {
-    this._platformLocation.forward();
-  }
-  back() {
-    this._platformLocation.back();
-  }
-  getState() {
-    return this._platformLocation.getState();
-  }
-  historyGo(relativePosition = 0) {
-    this._platformLocation.historyGo?.(relativePosition);
-  }
-  static ɵfac = function HashLocationStrategy_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _HashLocationStrategy)(ɵɵinject(PlatformLocation), ɵɵinject(APP_BASE_HREF, 8));
-  };
-  static ɵprov = ɵɵdefineInjectable({
-    token: _HashLocationStrategy,
-    factory: _HashLocationStrategy.ɵfac
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(HashLocationStrategy, [{
-    type: Injectable
-  }], () => [{
-    type: PlatformLocation
-  }, {
-    type: void 0,
-    decorators: [{
-      type: Optional
-    }, {
-      type: Inject,
-      args: [APP_BASE_HREF]
-    }]
-  }], null);
-})();
 var Location = class _Location {
   /** @internal */
   _subject = new Subject();
@@ -409,7 +318,7 @@ var Location = class _Location {
       });
     });
   }
-  /** @nodoc */
+  /** @docs-private */
   ngOnDestroy() {
     this._urlChangeSubscription?.unsubscribe();
     this._urlChangeListeners = [];
@@ -642,6 +551,82 @@ function _stripOrigin(baseHref) {
   }
   return baseHref;
 }
+
+// node_modules/@angular/common/fesm2022/common_module-Dx7dWex5.mjs
+var HashLocationStrategy = class _HashLocationStrategy extends LocationStrategy {
+  _platformLocation;
+  _baseHref = "";
+  _removeListenerFns = [];
+  constructor(_platformLocation, _baseHref) {
+    super();
+    this._platformLocation = _platformLocation;
+    if (_baseHref != null) {
+      this._baseHref = _baseHref;
+    }
+  }
+  /** @docs-private */
+  ngOnDestroy() {
+    while (this._removeListenerFns.length) {
+      this._removeListenerFns.pop()();
+    }
+  }
+  onPopState(fn) {
+    this._removeListenerFns.push(this._platformLocation.onPopState(fn), this._platformLocation.onHashChange(fn));
+  }
+  getBaseHref() {
+    return this._baseHref;
+  }
+  path(includeHash = false) {
+    const path = this._platformLocation.hash ?? "#";
+    return path.length > 0 ? path.substring(1) : path;
+  }
+  prepareExternalUrl(internal) {
+    const url = joinWithSlash(this._baseHref, internal);
+    return url.length > 0 ? "#" + url : url;
+  }
+  pushState(state, title, path, queryParams) {
+    const url = this.prepareExternalUrl(path + normalizeQueryParams(queryParams)) || this._platformLocation.pathname;
+    this._platformLocation.pushState(state, title, url);
+  }
+  replaceState(state, title, path, queryParams) {
+    const url = this.prepareExternalUrl(path + normalizeQueryParams(queryParams)) || this._platformLocation.pathname;
+    this._platformLocation.replaceState(state, title, url);
+  }
+  forward() {
+    this._platformLocation.forward();
+  }
+  back() {
+    this._platformLocation.back();
+  }
+  getState() {
+    return this._platformLocation.getState();
+  }
+  historyGo(relativePosition = 0) {
+    this._platformLocation.historyGo?.(relativePosition);
+  }
+  static ɵfac = function HashLocationStrategy_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _HashLocationStrategy)(ɵɵinject(PlatformLocation), ɵɵinject(APP_BASE_HREF, 8));
+  };
+  static ɵprov = ɵɵdefineInjectable({
+    token: _HashLocationStrategy,
+    factory: _HashLocationStrategy.ɵfac
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(HashLocationStrategy, [{
+    type: Injectable
+  }], () => [{
+    type: PlatformLocation
+  }, {
+    type: void 0,
+    decorators: [{
+      type: Optional
+    }, {
+      type: Inject,
+      args: [APP_BASE_HREF]
+    }]
+  }], null);
+})();
 var CURRENCIES_EN = {
   "ADP": [void 0, void 0, 0],
   "AFN": [void 0, "؋", 0],
@@ -1994,20 +1979,6 @@ var NgLocaleLocalization = class _NgLocaleLocalization extends NgLocalization {
     }]
   }], null);
 })();
-function registerLocaleData2(data, localeId, extraData) {
-  return registerLocaleData(data, localeId, extraData);
-}
-function parseCookieValue(cookieStr, name) {
-  name = encodeURIComponent(name);
-  for (const cookie of cookieStr.split(";")) {
-    const eqIndex = cookie.indexOf("=");
-    const [cookieName, cookieValue] = eqIndex == -1 ? [cookie, ""] : [cookie.slice(0, eqIndex), cookie.slice(eqIndex + 1)];
-    if (cookieName.trim() === name) {
-      return decodeURIComponent(cookieValue);
-    }
-  }
-  return null;
-}
 var WS_REGEXP = /\s+/;
 var EMPTY_ARRAY = [];
 var NgClass = class _NgClass {
@@ -2184,7 +2155,7 @@ var NgComponentOutlet = class _NgComponentOutlet {
   _needToReCreateComponentInstance(changes) {
     return changes["ngComponentOutlet"] !== void 0 || changes["ngComponentOutletContent"] !== void 0 || changes["ngComponentOutletInjector"] !== void 0 || this._needToReCreateNgModuleInstance(changes);
   }
-  /** @nodoc */
+  /** @docs-private */
   ngOnChanges(changes) {
     if (this._needToReCreateComponentInstance(changes)) {
       this._viewContainerRef.clear();
@@ -2210,7 +2181,7 @@ var NgComponentOutlet = class _NgComponentOutlet {
       }
     }
   }
-  /** @nodoc */
+  /** @docs-private */
   ngDoCheck() {
     if (this._componentRef) {
       if (this.ngComponentOutletInputs) {
@@ -2221,7 +2192,7 @@ var NgComponentOutlet = class _NgComponentOutlet {
       this._applyInputStateDiff(this._componentRef);
     }
   }
-  /** @nodoc */
+  /** @docs-private */
   ngOnDestroy() {
     this._moduleRef?.destroy();
   }
@@ -2358,7 +2329,6 @@ var NgForOf = class _NgForOf {
   _ngForOf = null;
   _ngForOfDirty = true;
   _differ = null;
-  // TODO(issue/24571): remove '!'
   // waiting for microsoft/typescript#43662 to allow the return type `TrackByFunction|undefined` for
   // the getter
   _trackByFn;
@@ -2378,7 +2348,7 @@ var NgForOf = class _NgForOf {
   }
   /**
    * Applies the changes when needed.
-   * @nodoc
+   * @docs-private
    */
   ngDoCheck() {
     if (this._ngForOfDirty) {
@@ -2706,7 +2676,7 @@ var NgSwitchCase = class _NgSwitchCase {
   }
   /**
    * Performs case matching. For internal use only.
-   * @nodoc
+   * @docs-private
    */
   ngDoCheck() {
     this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase));
@@ -3059,11 +3029,22 @@ var SubscribableStrategy = class {
 };
 var PromiseStrategy = class {
   createSubscription(async, updateLatestValue) {
-    return async.then(updateLatestValue, (e) => {
-      throw e;
-    });
+    async.then(
+      // Using optional chaining because we may have set it to `null`; since the promise
+      // is async, the view might be destroyed by the time the promise resolves.
+      (v) => updateLatestValue?.(v),
+      (e) => {
+        throw e;
+      }
+    );
+    return {
+      unsubscribe: () => {
+        updateLatestValue = null;
+      }
+    };
   }
   dispose(subscription) {
+    subscription.unsubscribe();
   }
 };
 var _promiseStrategy = new PromiseStrategy();
@@ -3674,6 +3655,19 @@ var CommonModule = class _CommonModule {
     }]
   }], null, null);
 })();
+
+// node_modules/@angular/common/fesm2022/xhr-BfNfxNDv.mjs
+function parseCookieValue(cookieStr, name) {
+  name = encodeURIComponent(name);
+  for (const cookie of cookieStr.split(";")) {
+    const eqIndex = cookie.indexOf("=");
+    const [cookieName, cookieValue] = eqIndex == -1 ? [cookie, ""] : [cookie.slice(0, eqIndex), cookie.slice(eqIndex + 1)];
+    if (cookieName.trim() === name) {
+      return decodeURIComponent(cookieValue);
+    }
+  }
+  return null;
+}
 var PLATFORM_BROWSER_ID = "browser";
 var PLATFORM_SERVER_ID = "server";
 function isPlatformBrowser(platformId) {
@@ -3682,7 +3676,35 @@ function isPlatformBrowser(platformId) {
 function isPlatformServer(platformId) {
   return platformId === PLATFORM_SERVER_ID;
 }
-var VERSION = new Version("19.2.4");
+var XhrFactory = class {
+};
+
+// node_modules/@angular/common/fesm2022/platform_navigation-B45Jeakb.mjs
+var PlatformNavigation = class _PlatformNavigation {
+  static ɵfac = function PlatformNavigation_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _PlatformNavigation)();
+  };
+  static ɵprov = ɵɵdefineInjectable({
+    token: _PlatformNavigation,
+    factory: () => (() => window.navigation)(),
+    providedIn: "platform"
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(PlatformNavigation, [{
+    type: Injectable,
+    args: [{
+      providedIn: "platform",
+      useFactory: () => window.navigation
+    }]
+  }], null, null);
+})();
+
+// node_modules/@angular/common/fesm2022/common.mjs
+function registerLocaleData2(data, localeId, extraData) {
+  return registerLocaleData(data, localeId, extraData);
+}
+var VERSION = new Version("19.2.13");
 var ViewportScroller = class _ViewportScroller {
   // De-sugared tree-shakable injection
   // See #23917
@@ -3817,8 +3839,6 @@ var NullViewportScroller = class {
    */
   setHistoryScrollRestoration(scrollRestoration) {
   }
-};
-var XhrFactory = class {
 };
 var PLACEHOLDER_QUALITY = "20";
 function getUrl(src, win) {
@@ -4165,9 +4185,8 @@ var PreconnectLinkChecker = class _PreconnectLinkChecker {
   }
   queryPreconnectLinks() {
     const preconnectUrls = /* @__PURE__ */ new Set();
-    const selector = "link[rel=preconnect]";
-    const links = Array.from(this.document.querySelectorAll(selector));
-    for (let link of links) {
+    const links = this.document.querySelectorAll("link[rel=preconnect]");
+    for (const link of links) {
       const url = getUrl(link.href, this.window);
       preconnectUrls.add(url.origin);
     }
@@ -4207,6 +4226,7 @@ var PRELOADED_IMAGES = new InjectionToken(typeof ngDevMode === "undefined" || ng
 var PreloadLinkCreator = class _PreloadLinkCreator {
   preloadedImages = inject(PRELOADED_IMAGES);
   document = inject(DOCUMENT);
+  errorShown = false;
   /**
    * @description Add a preload `<link>` to the `<head>` of the `index.html` that is served from the
    * server while using Angular Universal and SSR to kick off image loads for high priority images.
@@ -4224,10 +4244,9 @@ var PreloadLinkCreator = class _PreloadLinkCreator {
    * @param sizes The value of the `sizes` attribute passed in to the `<img>` tag
    */
   createPreloadLinkTag(renderer, src, srcset, sizes) {
-    if (ngDevMode) {
-      if (this.preloadedImages.size >= DEFAULT_PRELOADED_IMAGES_LIMIT) {
-        throw new RuntimeError(2961, ngDevMode && `The \`NgOptimizedImage\` directive has detected that more than ${DEFAULT_PRELOADED_IMAGES_LIMIT} images were marked as priority. This might negatively affect an overall performance of the page. To fix this, remove the "priority" attribute from images with less priority.`);
-      }
+    if (ngDevMode && !this.errorShown && this.preloadedImages.size >= DEFAULT_PRELOADED_IMAGES_LIMIT) {
+      this.errorShown = true;
+      console.warn(formatRuntimeError(2961, `The \`NgOptimizedImage\` directive has detected that more than ${DEFAULT_PRELOADED_IMAGES_LIMIT} images were marked as priority. This might negatively affect an overall performance of the page. To fix this, remove the "priority" attribute from images with less priority.`));
     }
     if (this.preloadedImages.has(src)) {
       return;
@@ -4390,7 +4409,7 @@ var NgOptimizedImage = class _NgOptimizedImage {
       });
     }
   }
-  /** @nodoc */
+  /** @docs-private */
   ngOnInit() {
     performanceMarkFeature("NgOptimizedImage");
     if (ngDevMode) {
@@ -4468,7 +4487,7 @@ var NgOptimizedImage = class _NgOptimizedImage {
       preloadLinkCreator.createPreloadLinkTag(this.renderer, this.getRewrittenSrc(), rewrittenSrcset, this.sizes);
     }
   }
-  /** @nodoc */
+  /** @docs-private */
   ngOnChanges(changes) {
     if (ngDevMode) {
       assertNoPostInitInputChange(this, changes, ["ngSrcset", "width", "height", "priority", "fill", "loading", "sizes", "loaderParams", "disableOptimizedSrcset"]);
@@ -5020,11 +5039,10 @@ function booleanOrUrlAttribute(value) {
 }
 
 export {
+  DOCUMENT,
   getDOM,
   setRootDomAdapter,
   DomAdapter,
-  PlatformNavigation,
-  DOCUMENT,
   PlatformLocation,
   LOCATION_INITIALIZED,
   BrowserPlatformLocation,
@@ -5032,8 +5050,8 @@ export {
   LocationStrategy,
   APP_BASE_HREF,
   PathLocationStrategy,
-  HashLocationStrategy,
   Location,
+  HashLocationStrategy,
   NumberFormatStyle,
   Plural,
   FormStyle,
@@ -5068,8 +5086,6 @@ export {
   formatNumber,
   NgLocalization,
   NgLocaleLocalization,
-  registerLocaleData2 as registerLocaleData,
-  parseCookieValue,
   NgClass,
   NgComponentOutlet,
   NgForOfContext,
@@ -5099,14 +5115,17 @@ export {
   CurrencyPipe,
   SlicePipe,
   CommonModule,
+  parseCookieValue,
   PLATFORM_BROWSER_ID,
   PLATFORM_SERVER_ID,
   isPlatformBrowser,
   isPlatformServer,
+  XhrFactory,
+  PlatformNavigation,
+  registerLocaleData2 as registerLocaleData,
   VERSION,
   ViewportScroller,
   NullViewportScroller,
-  XhrFactory,
   IMAGE_LOADER,
   provideCloudflareLoader,
   provideCloudinaryLoader,
@@ -5118,11 +5137,16 @@ export {
 };
 /*! Bundled license information:
 
+@angular/common/fesm2022/dom_tokens-rA0ACyx7.mjs:
+@angular/common/fesm2022/location-Dq4mJT-A.mjs:
+@angular/common/fesm2022/common_module-Dx7dWex5.mjs:
+@angular/common/fesm2022/xhr-BfNfxNDv.mjs:
+@angular/common/fesm2022/platform_navigation-B45Jeakb.mjs:
 @angular/common/fesm2022/common.mjs:
   (**
-   * @license Angular v19.2.4
+   * @license Angular v19.2.13
    * (c) 2010-2025 Google LLC. https://angular.io/
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-GPQCL3UH.js.map
+//# sourceMappingURL=chunk-5CA6N6GJ.js.map
