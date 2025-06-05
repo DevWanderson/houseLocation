@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Housinglocation } from '../housinglocation';
+import { HousingLocationInfo } from '../housinglocation';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-housing-location',
-  imports: [RouterLink, RouterOutlet],
+  imports: [CommonModule, RouterLink, RouterOutlet],
   template: `
     <section class="listing">
       <img class="listing-photo" [src]="housingLocation.photo" alt="Exterior photo of {{ housingLocation.name }}" crossorigin/> 
@@ -16,6 +16,6 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     </section>
   `,
   styleUrls: ['./housing-location.component.css'],})
-export class HousingLocationComponent {
-  @Input() housingLocation!: Housinglocation;
+export class HousingLocation {
+  @Input() housingLocation!: HousingLocationInfo;
 }
